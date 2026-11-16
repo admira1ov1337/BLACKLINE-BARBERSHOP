@@ -1,6 +1,6 @@
 # RU/ENG/DE VERSION
 
-# ENG
+# RU
 
 # BLACKLINE Barbershop
 
