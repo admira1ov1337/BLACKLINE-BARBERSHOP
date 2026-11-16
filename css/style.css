@@ -1,0 +1,899 @@
+/* =========================================
+   1. ПЕРЕМЕННЫЕ (дизайн-система)
+   ========================================= */
+:root {
+  /* Цвета */
+  --color-bg: #0D0D0D;
+  --color-surface: #1A1A1A;
+  --color-line: #2E2E2E;
+  --color-text: #E8DFD0;
+  --color-muted: #9A9288;
+  --color-accent: #b66d06fd;
+
+  /* Шрифты */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Отступы */
+  --space-s: 1rem;
+  --space-m: 2rem;
+  --space-l: 4rem;
+  --space-section: clamp(3rem, 12vw, 10rem);
+
+  /* Скорость анимаций */
+  --transition: 0.4s ease;
+}
+
+/* =========================================
+   2. СБРОС (reset) И БАЗА
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+address {
+  font-style: normal;
+}
+
+/* =========================================
+   3. ТИПОГРАФИКА
+   ========================================= */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-m);
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Маленькая подпись над заголовком */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-s);
+}
+
+/* =========================================
+   4. РАЗМЕТКА СЕКЦИЙ
+   ========================================= */
+
+.section {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: var(--space-section) 1.5rem;
+}
+
+.section {
+  border-top: 1px solid var(--color-line);
+}
+
+/* =========================================
+   5. КНОПКА
+   ========================================= */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  letter-spacing: 0.em;
+}
+
+/* =========================================
+   6. ЗАГЛУШКИ ДЛЯ ФОТО
+   ========================================= */
+.placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+/* =========================================
+   7. МЕЛКИЕ ДЕТАЛИ
+   ========================================= */
+.hero-text,
+.role,
+cite,
+.footer {
+  color: var(--color-muted);
+}
+/* =========================================
+   8. ШАПКА И НАВИГАЦИЯ
+   ========================================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(30px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+}
+
+.nav ul {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav a {
+  position: relative;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-muted);
+  transition: color var(--transition);
+}
+
+.nav a:hover {
+  color: var(--color-text);
+}
+
+/* Тонкая линия, которая "вырастает" под пунктом меню */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width var(--transition);
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* Кнопка в шапке чуть компактнее */
+.header .btn {
+  padding: 0.7rem 1.4rem;
+}
+
+/* Чтобы фиксированная шапка не закрывала заголовки при переходе по ссылкам */
+section {
+  scroll-margin-top: 70px;
+}
+
+/* =========================================
+   9. HERO-ЭКРАН
+   ========================================= */
+.hero {
+  min-height: 100vh;    
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-start;
+  padding: 8rem 1.5rem 4rem;
+
+  /* Временный фон. Позже заменим на фотографию */
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(201, 183, 156, 0.12), transparent 60%),
+    linear-gradient(180deg, #151515 0%, var(--color-bg) 100%);
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}   
+
+.hero h1 {
+  max-width: 30ch;
+  margin-bottom: var(--space-m);
+  text-align: center;
+  margin-inline: auto;
+}
+
+.hero-text {
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+/* =========================================
+   10. АДАПТАЦИЯ ШАПКИ
+   ========================================= 
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+  }
+} /* end of header adaptation */
+/* =========================================
+   11. БЛОК «О НАС»
+   ========================================= */
+#ueber-uns p:not(.eyebrow) {
+  max-width: 560px;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+} 
+
+/* =========================================
+   12. ПРАЙС-ЛИСТ
+   ========================================= */
+.price-list {
+  max-width: 760px;
+}
+
+.price-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.service {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 1.1rem;
+  transition: color var(--transition);
+}
+
+/* Пунктирная линия-«поводок» между названием и ценой */
+
+.service::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid var(--color-muted);
+  opacity: 0.4;
+}
+
+.price {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  white-space: nowrap;   /* ← новая строка */
+}
+
+.price-list li:hover .service {
+  color: var(--color-accent);
+}
+
+/* =========================================
+   13. КОМАНДА (CSS GRID)
+   ========================================= */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 2rem;
+}
+
+/* =========================================
+   14. ФОТО: общий стиль
+   ========================================= */
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  transition: border-color var(--transition);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* Единый «цветокор» для разных фото */
+  filter: grayscale(25%) contrast(1.05) brightness(0.9);
+  transition: transform 1.2s ease, filter 1.2s ease;
+}
+
+.photo:hover {
+  border-color: var(--color-accent);
+}
+
+.photo:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%) contrast(1.05) brightness(1);
+}
+
+/* =========================================
+   15. ИНТЕРЬЕР
+   ========================================= */
+.interior-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 260px;
+  gap: 1rem;
+}
+
+.interior-grid .photo:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* =========================================
+   16. КОМАНДА: фото
+   ========================================= */
+.team-card .photo {
+  aspect-ratio: 3 / 4;
+  margin-bottom: 1.25rem;
+}
+
+/* =========================================
+   17. ГАЛЕРЕЯ
+   ========================================= */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 1rem;
+}
+
+.gallery-grid .photo {
+  aspect-ratio: 1 / 1;
+}
+
+/* =========================================
+   18. ОТЗЫВЫ
+   ========================================= */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 2rem;
+}
+
+blockquote {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  transition: border-color var(--transition);
+}
+
+blockquote:hover {
+  border-color: var(--color-accent);
+}
+
+.stars {
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+}
+
+.quote-text {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+cite {
+  font-style: normal;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* =========================================
+   19. ИНТЕРЬЕР НА ТЕЛЕФОНЕ
+   ========================================= */
+@media (max-width: 700px) {
+  .interior-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interior-grid .photo:first-child {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+/* =========================================
+   20. КОНТАКТЫ: РАЗМЕТКА
+   ========================================= */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.contact-info {
+  scroll-margin-top: 90px;
+}
+
+.contact-info address {
+  margin-bottom: var(--space-m);
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+.contact-info address a {
+  color: var(--color-muted);
+  transition: color var(--transition);
+}
+
+.contact-info address a:hover {
+  color: var(--color-accent);
+}
+
+/* Часы работы */
+.hours {
+  width: 100%;
+  margin-bottom: var(--space-m);
+  border-collapse: collapse;
+}
+
+.hours caption {
+  text-align: left;
+  padding-bottom: 0.75rem;
+}
+
+.hours th,
+.hours td {
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--color-line);
+  font-weight: 300;
+  text-align: left;
+}
+
+.hours td {
+  text-align: right;
+  color: var(--color-muted);
+}
+
+/* =========================================
+   21. ФОРМА
+   ========================================= */
+.booking-form {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+
+.booking-form h3 {
+  margin-bottom: var(--space-m);
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.7rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  color-scheme: dark;
+  transition: border-color var(--transition);
+}
+
+.field select option {
+  background: var(--color-surface);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-accent);
+}
+
+/* Чекбокс согласия */
+.consent {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.consent input {
+  margin-top: 0.35rem;
+  accent-color: var(--color-accent);
+}
+
+.consent a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* <button> по умолчанию выглядит иначе, чем <a>, поэтому уточняем */
+button.btn {
+  background: transparent;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+button.btn:hover {
+  background: var(--color-accent);
+}
+
+/* =========================================
+   22. КАРТА
+   ========================================= */
+.map {
+  display: grid;
+  place-items: center;
+  margin-top: var(--space-l);
+  min-height: 380px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+
+.map-consent {
+  max-width: 420px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.map-consent p {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.map iframe {
+  width: 100%;
+  height: 380px;
+  border: 0;
+  /* Превращаем светлую карту в тёмную */
+  filter: grayscale(1) invert(0.9) contrast(0.9);
+}
+
+/* =========================================
+   23. ФУТЕР
+   ========================================= */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.8rem;
+}
+
+.footer nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer a:hover {
+  color: var(--color-accent);
+}
+
+/* Временная адаптация новых блоков */
+@media (max-width: 800px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.legal {
+  padding-top: 9rem;
+  max-width: 760px;
+}
+
+.legal h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: var(--space-l);
+}
+
+.legal h2 {
+  font-size: 1.6rem;
+  margin: var(--space-m) 0 0.75rem;
+}
+
+.legal p {
+  color: var(--color-muted);
+}
+/* =========================================
+   24. БУРГЕР-МЕНЮ
+   ========================================= */
+
+/* На компьютере бургер и дополнительный пункт скрыты */
+.burger,
+.nav-cta {
+  display: none;
+}
+
+.burger {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger span {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background: var(--color-text);
+  transition: transform var(--transition), top var(--transition);
+}
+
+.burger span:nth-child(1) { top: 17px; }
+.burger span:nth-child(2) { top: 26px; }
+
+/* Когда меню открыто, линии превращаются в крестик */
+.burger[aria-expanded="true"] span:nth-child(1) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+
+.burger[aria-expanded="true"] span:nth-child(2) {
+  top: 21px;
+  transform: rotate(-45deg);
+}
+
+/* =========================================
+   25. АДАПТИВНОСТЬ
+   ========================================= */
+
+/* Планшеты и телефоны */
+@media (max-width: 900px) {
+  .burger {
+    display: block;
+  }
+
+  .header .btn {
+    margin-left: auto;
+    margin-right: 0.75rem;
+  }
+
+  /* Меню превращается в выпадающую панель под шапкой */
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 1.5rem 2rem;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  }
+
+  .nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .nav a::after {
+    display: none; /* линия при наведении на телефоне не нужна */
+  }
+}
+
+/* Телефоны */
+@media (max-width: 600px) {
+  /* Кнопка в шапке прячется, вместо неё пункт в меню.
+     Выбираем только кнопку со ссылкой #termin, чтобы не скрыть «Zurück» на страницах Impressum */
+  .header .btn[href="#termin"] {
+    display: none;
+  }
+
+  .burger {
+    margin-left: auto;
+  }
+
+  .nav-cta {
+    display: block;
+  }
+
+  .nav .nav-cta a {
+    color: var(--color-accent);
+    border-bottom: none;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .price-list li {
+    padding: 1rem 0;
+  }
+
+  .service {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 1.4rem;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+}
+
+/* Узкие телефоны: дата и время друг под другом */
+@media (max-width: 500px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+/* =========================================
+   26. АНИМАЦИИ
+   ========================================= */
+
+/* Одна «заготовка» анимации: появиться и чуть подняться снизу */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- Появление при прокрутке --- */
+/* Класс reveal добавляет JavaScript */
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: fade-up 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* --- Вступление hero при загрузке страницы --- */
+.hero-content > * {
+  animation: fade-up 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-content > :nth-child(1) { animation-delay: 0.2s; }
+.hero-content > :nth-child(2) { animation-delay: 0.4s; }
+.hero-content > :nth-child(3) { animation-delay: 0.65s; }
+.hero-content > :nth-child(4) { animation-delay: 0.9s; }
+
+/* --- Активный пункт меню --- */
+.nav a.is-active {
+  color: var(--color-text);
+}
+
+.nav a.is-active::after {
+  width: 100%;
+}
+
+/* --- Уважение к пользователям, которым анимации вредят --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}
